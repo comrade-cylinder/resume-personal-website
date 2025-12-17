@@ -6,3 +6,92 @@
     justify-content: center;
     align-items: center;
 }
+
+#menu-toggle img {
+    height: auto;
+    width: 25px;
+}
+
+#menu-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: transparent;
+}
+
+#nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+#nav-menu ul {
+    list-style: none;
+    padding: 50px 20px;
+    margin: 0;
+}
+
+
+#nav-menu a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #000;
+}
+
+#nav-menu.open {
+    left: 0;
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#menu-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#menu-close img {
+    width: 15px;
+    height: auto;
+}
+
+#seakl-gif {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+#seal-link {
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    cursor: pointer;
+}
