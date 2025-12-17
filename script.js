@@ -34,6 +34,13 @@ const gif = document.getElementById('seal-gif');
 sealLink.addEventListener('click', (e) => {
     e.preventDefault();
     gif.style.opacity= '1';
+
+    confetti ({
+        particleCount: 50,
+        spread: 60,
+        origin: {x: 0.5, y: 0.5},
+        colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00']
+    });
     setTimeout(() => {
         gif.style.opacity = '0';
     }, 4000);

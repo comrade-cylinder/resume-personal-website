@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <div class="header">
-        <h1>FABIAN HILLERZEDER</h1>
         <button id="menu-toggle">
             <img src="./icons/Hamburger-Menu-1--Streamline-Core.png.png">
         </button>
@@ -19,12 +19,24 @@
     <nav id="nav-menu">
         <button id="menu-close"><img src="./icons/Delete-1--Streamline-Core.png.png"></button>
         <ul>
-            <li><a href="#">ABOUT</a></li>
+            <li><a href="#about">ABOUT</a></li>
             <li><a href="#">PROJECTS</a></li>
             <li><a href="#">CREDITS</a></li>
             <li><a id="seal-link" href="#">SEAL</a></li>
         </ul>
     </nav>
+
+    <section id="hero">
+        <h1>FABIAN HILLERZEDER</h1>
+        <p>Welcome to my portfolio</p>
+        <div class="scroll-indicator">↓ Scroll Down</div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>lorem ipsum....</p>
+    </section>
+
     <img id="seal-gif" src="./img/seal-clap.gif" alt="Seal gif">
     <script src="script.js"></script>
 </body>
