@@ -325,7 +325,7 @@ body {
 
 
 #hero {
-    height: calc(100vh - var(--nav-space) - (var(--section-margin) * 2));
+    height: calc(97vh - var(--nav-space) - (var(--section-margin) * 2));
     min-height: auto;
     display: flex;
     flex-direction: column;
