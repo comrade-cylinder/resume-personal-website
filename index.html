@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- navbar for mobile -->
     <header class="navbar">
         <div class="logo">FH</div>
         <nav class="nav-links">
@@ -27,13 +28,13 @@
         <button id="menu-close"><img src="./icons/Delete-1--Streamline-Core.png.png"></button>
         <ul>
             <li><a href="#about">ABOUT</a></li>
-            <li><a href="#">PROJECTS</a></li>
-            <li><a href="#">CREDITS</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#credits">CREDITS</a></li>
             <li><a id="seal-link" href="#">SEAL</a></li>
         </ul>
     </nav>
-
-    <section id="hero">
+<!-- hero -->
+    <section id="hero" class="glass-section">
         <h1>FABIAN HILLERZEDER</h1>
         <p class="hero-sub">Lorem ipsum...</p>
         <div class="hero-cta">
@@ -46,11 +47,60 @@
         <div class="scroll-indicator">↓ Scroll Down</div>
     </section>
 
-    <section id="about">
+    <section id="about" class="glass-section">
         <h2>About Me</h2>
         <p>lorem ipsum....</p>
     </section>
 
+<!-- projects -->
+        <section id="projects" class="glass-section projects">
+        <div class="section-header">
+            <h2>Projects</h2>
+            <p class="section-sub">Selected work that balances UX, performance and craft</p>
+        </div>
+                <div class="projects-grid">
+                        <article class="project-card">
+                                <div class="project-meta">
+                                        <span class="pill">Web</span>
+                                        <span class="pill">React</span>
+                                </div>
+                                <h3>Project One</h3>
+                                <p>Brief one-liner about what it is and what impact it had.</p>
+                                <div class="project-links">
+                                        <a href="#" class="btn primary">Live</a>
+                                        <a href="#" class="btn ghost">Code</a>
+                                </div>
+                        </article>
+        
+            <article class="project-card">
+      <div class="project-meta">
+        <span class="pill">UI</span>
+        <span class="pill">Design</span>
+      </div>
+      <h3>Project Two</h3>
+      <p>Quick description of the problem, your role, and outcome.</p>
+      <div class="project-links">
+        <a href="#" class="btn primary">Case Study</a>
+        <a href="#" class="btn ghost">Code</a>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-meta">
+        <span class="pill">Data</span>
+        <span class="pill">Viz</span>
+      </div>
+      <h3>Project Three</h3>
+      <p>What you built, tech used, and why it mattered.</p>
+      <div class="project-links">
+        <a href="#" class="btn primary">Demo</a>
+        <a href="#" class="btn ghost">Code</a>
+      </div>
+    </article>
+  </div>
+        </section>
+
+<!-- footer -->
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-brand">FH</div>
