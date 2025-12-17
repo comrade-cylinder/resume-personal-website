@@ -1,3 +1,25 @@
+// Theme Toggle
+(function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check localStorage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initialTheme = savedTheme || systemTheme;
+    
+    // Set initial theme
+    html.setAttribute('data-theme', initialTheme);
+    
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+})();
+
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
@@ -135,6 +157,7 @@ document.querySelectorAll('.btn[data-target]').forEach(btn => {
     let h = 0;
     let fireflies = [];
     let rafId = null;
+    let parallaxY = 0;
 
     function resize() {
         w = Math.floor(window.innerWidth);
@@ -194,14 +217,18 @@ document.querySelectorAll('.btn[data-target]').forEach(btn => {
             f.phase += 0.02 + Math.random() * 0.02;
             const a = (Math.sin(f.phase) * 0.4 + 0.6) * f.flicker; // 0.2..1.0 approx
 
+            // Parallax offset by scroll (wrap to avoid gaps)
+            const px = f.x;
+            const py = ((f.y - parallaxY) % h + h) % h;
+
             // Radial glow
-            const g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 10);
+            const g = ctx.createRadialGradient(px, py, 0, px, py, f.r * 10);
             g.addColorStop(0, `hsla(${f.hue} 90% 70% / ${Math.min(1, a)})`);
             g.addColorStop(0.3, `hsla(${f.hue} 90% 60% / ${Math.min(0.6, a)})`);
             g.addColorStop(1, `hsla(${f.hue} 90% 50% / 0)`);
             ctx.fillStyle = g;
             ctx.beginPath();
-            ctx.arc(f.x, f.y, f.r * 10, 0, Math.PI * 2);
+            ctx.arc(px, py, f.r * 10, 0, Math.PI * 2);
             ctx.fill();
         }
 
@@ -233,6 +260,13 @@ document.querySelectorAll('.btn[data-target]').forEach(btn => {
         if (rafId) cancelAnimationFrame(rafId);
         rafId = null;
     }
+
+    // Parallax follower on scroll
+    function onScroll() {
+        parallaxY = window.scrollY * 0.12;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     window.addEventListener('resize', resize);
 
@@ -312,4 +346,92 @@ document.querySelectorAll('.btn[data-target]').forEach(btn => {
     }, observerOptions);
 
     reveals.forEach(el => observer.observe(el));
+})();
+
+// Scroll Progress Bar
+(function initScrollProgress() {
+    const progressBar = document.getElementById('scroll-progress');
+    
+    window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+    }, { passive: true });
+})();
+
+// Cursor Trail Effect
+(function initCursorTrail() {
+    const canvas = document.getElementById('cursor-trail');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Respects prefers-reduced-motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+    
+    class Particle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 1.5 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.opacity = 0.4;
+            this.color = ['rgba(102, 126, 234,', 'rgba(118, 75, 162,', 'rgba(240, 147, 251,'][Math.floor(Math.random() * 3)];
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.opacity -= 0.03;
+        }
+        
+        draw() {
+            ctx.fillStyle = this.color + this.opacity + ')';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    
+    function createParticles(x, y) {
+        for (let i = 0; i < 1; i++) {
+            particles.push(new Particle(x, y));
+        }
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = particles.length - 1; i >= 0; i--) {
+            particles[i].update();
+            particles[i].draw();
+            
+            if (particles[i].opacity <= 0) {
+                particles.splice(i, 1);
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        createParticles(mouseX, mouseY);
+    });
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    
+    animate();
 })();

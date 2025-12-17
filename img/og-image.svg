@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Fabian Hillerzeder Portfolio Preview</title>
+  <desc id="desc">Preview card for Fabian Hillerzeder frontend portfolio with gradient background and glass panel.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0f1f" />
+      <stop offset="50%" stop-color="#1c2344" />
+      <stop offset="100%" stop-color="#0d1224" />
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="rgba(102,126,234,0.32)" />
+      <stop offset="45%" stop-color="rgba(118,75,162,0.24)" />
+      <stop offset="100%" stop-color="rgba(15,20,38,0)" />
+    </radialGradient>
+    <filter id="glass" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <g filter="url(#glass)">
+    <rect x="120" y="140" width="960" height="350" rx="28" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+    <text x="180" y="260" fill="#e5e7ff" font-family="'Space Mono', 'Roboto', monospace" font-size="44" font-weight="700">Fabian Hillerzeder</text>
+    <text x="180" y="320" fill="#cbd5ff" font-family="'Roboto', Arial, sans-serif" font-size="28" font-weight="600">Frontend Developer</text>
+    <text x="180" y="375" fill="#a5b4fc" font-family="'Roboto', Arial, sans-serif" font-size="22" font-weight="400">Fast, accessible, glassmorphic web experiences</text>
+  </g>
+</svg>

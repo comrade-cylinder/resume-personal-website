@@ -3,14 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fabian Hillerzeder - Front-end developer crafting fast, accessible, and visually polished web experiences with modern JavaScript, TypeScript, and CSS.">
+    <meta name="theme-color" content="#667eea">
+    <meta property="og:title" content="Fabian Hillerzeder - Frontend Developer">
+    <meta property="og:description" content="Fast, accessible, and glassy web experiences with modern JS, HTML, and CSS.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./img/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fabian Hillerzeder - Frontend Developer">
+    <meta name="twitter:description" content="Fast, accessible, and glassy web experiences with modern JS, HTML, and CSS.">
+    <meta name="twitter:image" content="./img/og-image.svg">
+    <link rel="icon" type="image/svg+xml" href="./img/favicon.svg">
     <link rel="stylesheet" href="style.css">
     <title>Fabian Hillerzeder</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+    <!-- Custom Cursor SVG -->
+    <svg id="cursor-svg" width="0" height="0" style="display:none;">
+        <defs>
+            <style>
+                @font-face {
+                    font-family: 'Roboto';
+                    src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@400');
+                }
+            </style>
+            <!-- Default cursor -->
+            <cursor id="default-cursor" x="0" y="0">
+                <circle cx="12" cy="12" r="8" fill="none" stroke="rgba(102, 126, 234, 0.6)" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="2" fill="rgba(102, 126, 234, 0.8)"/>
+                <circle cx="12" cy="12" r="8" fill="none" stroke="rgba(118, 75, 162, 0.3)" stroke-width="0.5" opacity="0.6"/>
+            </cursor>
+            <!-- Pointer cursor for clickable elements -->
+            <cursor id="pointer-cursor" x="5" y="0">
+                <path d="M5 0 L10 8 L6 10 L8 16 L5 14 L3 20 L0 18 L2 12 L0 10 Z" fill="rgba(240, 147, 251, 0.8)"/>
+            </cursor>
+        </defs>
+    </svg>
 </head>
 <body>
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <canvas id="cursor-trail" aria-hidden="true"></canvas>
     <canvas id="fireflies" aria-hidden="true"></canvas>
     <header class="navbar">
         <div class="logo">FH</div>
@@ -20,12 +54,28 @@
             <a href="#projects">Projects</a>
             <a href="#credits">Credits</a>
         </nav>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
         <button id="menu-toggle" class="mobile-toggle">
-            <img src="./icons/Hamburger-Menu-1--Streamline-Core.png.png">
+            <img src="./icons/Hamburger-Menu-1--Streamline-Core.png.png" loading="lazy" decoding="async" alt="Open menu">
         </button>
     </header>
     <nav id="nav-menu">
-        <button id="menu-close"><img src="./icons/Delete-1--Streamline-Core.png.png"></button>
+        <button id="menu-close"><img src="./icons/Delete-1--Streamline-Core.png.png" loading="lazy" decoding="async" alt="Close menu"></button>
         <ul>
             <li><a href="#about">ABOUT</a></li>
             <li><a href="#projects">PROJECTS</a></li>
@@ -58,11 +108,26 @@
         </p>
     </section>
 
+    <section id="skills" class="glass-section reveal">
+        <h2>Skills</h2>
+        <p class="section-sub">Early-stage stack I’m comfortable with</p>
+        <div class="skills-grid">
+            <span class="pill">HTML5</span>
+            <span class="pill">CSS3</span>
+            <span class="pill">JavaScript (ES6)</span>
+            <span class="pill">Responsive Layout</span>
+            <span class="pill">Flexbox & Grid</span>
+            <span class="pill">Accessibility basics</span>
+            <span class="pill">Git basics</span>
+            <span class="pill">GitHub Pages</span>
+        </div>
+    </section>
+
 <!-- projects -->
         <section id="projects" class="glass-section projects reveal">
         <div class="section-header">
             <h2>Projects</h2>
-            <p class="section-sub">Selected work that balances UX, performance and craft</p>
+            <p class="section-sub">Projects in progress — shipping soon</p>
         </div>
                 <div class="projects-grid">
                     <article class="project-card">
@@ -76,7 +141,7 @@
                             parallax gradient, and playful Easter eggs.
                         </p>
                         <div class="project-links">
-                            <a href="#" class="btn primary">Live</a>
+                            <a href="#" class="btn primary disabled" aria-disabled="true">Live (coming soon)</a>
                             <a href="https://github.com/comrade-cylinder/resume-personal-website" target="_blank" rel="noreferrer" class="btn ghost">Code</a>
                         </div>
                     </article>
@@ -92,8 +157,8 @@
                             the OpenWeather API. Focused on performance and accessibility.
                         </p>
                         <div class="project-links">
-                            <a href="#" class="btn primary">Live</a>
-                            <a href="#" class="btn ghost">Code</a>
+                            <a href="#" class="btn primary disabled" aria-disabled="true">Live (coming soon)</a>
+                            <a href="https://github.com/comrade-cylinder" target="_blank" rel="noreferrer" class="btn ghost">Code (profile)</a>
                         </div>
                     </article>
 
@@ -108,8 +173,8 @@
                             stores locally when not. Built for speed and reliability.
                         </p>
                         <div class="project-links">
-                            <a href="#" class="btn primary">Live</a>
-                            <a href="#" class="btn ghost">Code</a>
+                            <a href="#" class="btn primary disabled" aria-disabled="true">Live (coming soon)</a>
+                            <a href="https://github.com/comrade-cylinder" target="_blank" rel="noreferrer" class="btn ghost">Code (profile)</a>
                         </div>
                     </article>
                 </div>
@@ -119,8 +184,8 @@
                 <h2>Contact</h2>
                 <p>Like what you see? Let's build something great together.</p>
                 <div class="hero-cta">
-                    <a class="btn primary" href="mailto:fabian.hillerzeder@proton.me>Email Me</a>
-                    <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+                    <a class="btn primary" href="mailto:fabian.hillerzeder@proton.me">Email Me</a>
+                    <a class="btn ghost" href="https://github.com/comrade-cylinder" target="_blank" rel="noreferrer">GitHub</a>
                 </div>
             </section>
 
@@ -130,14 +195,13 @@
             <div class="footer-brand">FH</div>
             <div class="footer-social">
                 <a href="https://github.com/comrade-cylinder" target="_blank" rel="noreferrer">GitHub</a>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a href="mailto:fabian.hillerzeder@proton.me">Email</a>
             </div>
             <button id="footer-egg" class="footer-egg" aria-label="Hidden seal">🐟</button>
         </div>
     </footer>
 
-    <img id="seal-gif" src="./img/seal-clap.gif" alt="Seal gif">
+    <img id="seal-gif" src="./img/seal-clap.gif" alt="Seal gif" loading="lazy" decoding="async">
     <div id="seal-msg">YOU FOUND THE SEAL 🦭</div>
 
     <div id="credits-backdrop" aria-hidden="true"></div>
