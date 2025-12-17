@@ -1,30 +1,87 @@
 *{
     font-family: "Roboto", "Arial", "Helvetica", sans-serif;
 }
-.header {
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-image: url(img/aerial-view-greenery-forest.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+/* Fixed Header Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    position: relative;
-    z-index: 10;
+    padding: 15px 40px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    box-sizing: border-box;
 }
 
-#menu-toggle img {
-    height: auto;
-    width: 25px;
+/* Logo/Name */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+    font-family: "Bebas Neue", sans-serif;
 }
 
-#menu-toggle {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: none;
+/* Desktop Nav Links */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #667eea;
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+    display: none;
+    background: transparent;
     border: none;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background-color: transparent;
+}
+
+.mobile-toggle img {
+    width: 25px;
+    height: auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-toggle {
+        display: block;
+    }
 }
 
 #nav-menu {
@@ -100,64 +157,86 @@
 
 #hero {
     height: 100vh;
+    padding-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #333 0%, #800 100%);
+    background: rgab(51,51,51,0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.37);
+    margin: 20px;
+    border-radius: 10px;
     background-size: cover;
     position: relative;
     color: white;
     text-align: center;
 }
-#hero::before {
-    content : '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.1"/></svg>');
-    pointer-events: none;
-}
+
 
 #hero h1 {
-    font-size: 4rem;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 6rem;
     z-index: 1;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: focusIn 1.4s cubic-bezier(0.550, 0.055, 0.675, 0.190) 1s both;
 }
 
-   #hero p {
-       font-size: 1.5rem;
-       z-index: 1;
-   }
 
-   .scroll-indicator {
-       position: absolute;
-       bottom: 20px;
-       left: 50%;
-       transform: translateX(-50%);
-       font-size: 1.2rem;
-       color: white;
-       animation: bounce 2s infinite;
-       z-index: 1;
-   }
+#hero p {
+    font-size: 2rem;
+    z-index: 1;
+}
 
-   @keyframes bounce {
-       0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-       40% { transform: translateX(-50%) translateY(-10px); }
-       60% { transform: translateX(-50%) translateY(-5px); }
-   }#about {
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: white;
+    animation: bounce 2s infinite;
+    z-index: 1;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-10px); }
+    60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+#about {
     min-height: 100vh;
     padding: 50px 20px;
-    background: linear-gradient((135deg, #667eea 0%, #764ba2 100%));
-    background-size: cover;
+    background: rgba(102, 126, 234, 02,);
+    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.37);
+    margin: 20px;
+    border-radius: 10px;
     position: relative;
     color: white;
     text-align: center;
 }
-
 #about h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-}   
+} 
+
+
+@keyframes focusIn {
+    0% {
+        opacity: 0;
+        filter: blur(12px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+    
+}
+

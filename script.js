@@ -30,9 +30,10 @@ function handleOutsideClick (event) {
 
 const sealLink = document.getElementById('seal-link');
 const gif = document.getElementById('seal-gif');
-
+let sealTimeout;
 sealLink.addEventListener('click', (e) => {
     e.preventDefault();
+    clearTimeout(sealTimeout);
     gif.style.opacity= '1';
 
     confetti ({
@@ -41,7 +42,19 @@ sealLink.addEventListener('click', (e) => {
         origin: {x: 0.5, y: 0.5},
         colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00']
     });
-    setTimeout(() => {
+    sealTimeout = setTimeout(() => {
         gif.style.opacity = '0';
     }, 4000);
-})
+});
+
+// Smooth scroll for desktop nav links
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
